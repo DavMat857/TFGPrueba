@@ -1,0 +1,3 @@
+* Respecto a combinaciones:
+	1.- Como sacar umbral lo de la media + desviación típica de los residuos
+	2.- Modificar mezcla combinaciones
