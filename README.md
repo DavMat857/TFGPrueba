@@ -4,17 +4,17 @@ Observación: la creación de este repositorio no está basado en otros y la aut
 
 Vamos a presentar distintos scripts para la detección de saltos de ciclo:
 
-##Para el preprocesado de los ficheros Rinex 2.11 usaremos:
+## Para el preprocesado de los ficheros Rinex 2.11 usaremos:
 
 * `funcionesdef.py`: contiene la información relativa a las funciones utilizadas. 
 *  `preprocesado.ipynb`: muestra ejemplos de utilización del anterior script.
 
-##Algoritmos para la detección del ciclos[Todos están explicados en el TFG]:
+## Algoritmos para la detección del ciclos[Todos están explicados en el TFG]:
 __Observación__: los algoritmos siguen la misma estructura
-	1. Datos a seleccionar.
-	2. Visualización de los datos.
-	3. Algoritmo.
-	4. Función auxiliar.
+1. Datos a seleccionar.
+2. Visualización de los datos.
+3. Algoritmo.
+4. Función auxiliar.
 
 * `combinacion_libre_geo.py`: es un algoritmo que utiliza la combinación libre de geometría
 * `combinacion_geo_iono.py`: es un algoritmo que utiliza la combinación libre de geometría e ionosfera, realizando comparaciones entre ellas.
