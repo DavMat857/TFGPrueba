@@ -12,27 +12,43 @@ l2 = L2(filename, sat)
 #Visualización de L1 para cada satélite para L2, poner 4 en vez de 3
 def visualizacion():
     graficar_frec(filename,3)
-    
+
 
 #Algoritmo
 numero_muestras = 10
-umbral = 4.54
+umbral = 15.77
 
 def algoritmo():
-    
-    geo = f1menosf2(l1,l2) #L1-L2
-    graf_datos(geo, "combinación L1-L2")
-    resultados = alg_sacar_saltos(geo,numero_muestras,umbral)
+
+    io = combinacion_libre_io(l1,l2)
+    graf_datos(io, "Combinación libre io")
+    resultados = alg_sacar_saltos(io,numero_muestras,umbral)
     return resultados
 
 #Funciones auxiliares
+def combinacion_libre_io(l1, l2):
+    
+    D = {}
+    
+    l1_data = np.array(list(l1.values()))
+    l2_data = np.array(list(l2.values()))
+    
+    F1 = 1575.42e6
+    F2 = 1227.60e6
+    
+    datos = (l1_data* (F1**2) - l2_data * (F2**2 )) / (F1**2 - F2**2)
+    datos= list(datos)
+    
+    D = dict(zip(list(l1.keys()),datos))
+    return D
 
-"""Introduces datos, numero de muestras por paso y el umbral"""
 def alg_sacar_saltos(datos,numero_muestras,umbral): 
+#Si los errores mayor que un valor entonces salto de ciclo y marcar valores
     saltos = []
     
     for i in range(0,len(datos),numero_muestras):
-    
+        #print("Analizamos",number,numero_muestras)
+        
         clave_items = list(datos.items())[i:i + numero_muestras]
         claves = [i[0] for i in clave_items]
         valores = [i[1] for i in clave_items]
@@ -42,13 +58,14 @@ def alg_sacar_saltos(datos,numero_muestras,umbral):
         p  = np.poly1d(coeffs)
         pol = [p(n) for n in claves]
         
+       
         if claves[len(claves)-1]- claves[0] > 30:
           saltos.append(claves[j])
         else:
             valor_real = np.array(valores)
             valor_pol = np.array(pol)
             error = np.abs(valor_real - valor_pol)
-
+            #print(error)
             for j in range(0,len(error)-1,1):
                 if error[j]  > umbral:
                     saltos.append(claves[j])
@@ -56,4 +73,3 @@ def alg_sacar_saltos(datos,numero_muestras,umbral):
                      saltos.append(0)
                      
     return np.array(saltos)
-

@@ -33,7 +33,7 @@ def visualizacion():
     plt.show()    
 
 #Algoritmo
-def algoritmo() :
+def algoritmo() :# umbral y nº de observaciones
   #Creación de listas donde almacenar resultados
     saltos_comunes = []
     duda_geo = []
