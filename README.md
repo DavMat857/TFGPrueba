@@ -17,8 +17,9 @@ __Observación__: los algoritmos siguen la misma estructura
 4. Función auxiliar.
 
 * `combinacion_libre_geo.py`: es un algoritmo que utiliza la combinación libre de geometría
+* `combinacion_libre_io.py`: es un algoritmo que utiliza la combinación libre de ionosfera para la detección de saltos de ciclo
 * `combinacion_geo_iono.py`: es un algoritmo que utiliza la combinación libre de geometría e ionosfera, realizando comparaciones entre ellas.
-	* Crear solo geo y solo io
+	
 *  `clustering.py`: es un algoritmo basado en DBSCAN para la detección de saltos de ciclo.
 *  `filtropromedio.py`: es un algoritmo que utiliza el filtro promedio móvil, y el umbral está relacionado con la desviación típica y con ABS.
 	 * Quitar gráficas.   

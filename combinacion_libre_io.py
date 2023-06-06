@@ -16,14 +16,51 @@ def visualizacion():
 
 #Algoritmo
 numero_muestras = 10
-umbral = 15.77
+
 
 def algoritmo():
 
     io = combinacion_libre_io(l1,l2)
     graf_datos(io, "Combinación libre io")
+    media,std = selector_umbral(io,numero_muestras)
+    umbral = media + std
     resultados = alg_sacar_saltos(io,numero_muestras,umbral)
     return resultados
+
+#Obtención de umbral
+def selector_umbral(datos : dict,numero_muestras):
+   
+    errores_totales = np.array([])
+    
+    e = []
+    for i in range(0,len(datos),numero_muestras):
+        
+        
+        clave_items = list(datos.items())[i:i + numero_muestras]
+        claves = [i[0] for i in clave_items]
+        valores = [i[1] for i in clave_items]
+        degree = 2
+        
+        coeffs = np.polyfit(claves,valores,degree)
+        p  = np.poly1d(coeffs)
+        pol = [p(n) for n in claves]
+        
+       
+        if claves[len(claves)-1]- claves[0] > 30:
+          print(f"Salto de ciclo entre {claves[0]} y {claves[len(claves)-1]} por brecha de datos")
+          
+        else:
+            valor_real = np.array(valores)
+            valor_pol = np.array(pol)
+            error = np.abs(valor_real - valor_pol)
+            e.append(list(error))
+            errores_totales = np.concatenate((errores_totales,error))
+            
+
+    media = np.mean(errores_totales)
+    std = np.std(errores_totales)
+    
+    return media,std
 
 #Funciones auxiliares
 def combinacion_libre_io(l1, l2):

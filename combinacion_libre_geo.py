@@ -16,15 +16,52 @@ def visualizacion():
 
 #Algoritmo
 numero_muestras = 10
-umbral = 4.54
+
 
 def algoritmo():
     
     geo = f1menosf2(l1,l2) #L1-L2
     graf_datos(geo, "combinación L1-L2")
+    media,std = selector_umbral(geo,numero_muestras)
+    umbral = media + std
     resultados = alg_sacar_saltos(geo,numero_muestras,umbral)
     return resultados
 
+#Obtención del umbral
+
+def selector_umbral(datos : dict,numero_muestras):
+   
+    errores_totales = np.array([])
+    
+    e = []
+    for i in range(0,len(datos),numero_muestras):
+        
+        
+        clave_items = list(datos.items())[i:i + numero_muestras]
+        claves = [i[0] for i in clave_items]
+        valores = [i[1] for i in clave_items]
+        degree = 2
+        
+        coeffs = np.polyfit(claves,valores,degree)
+        p  = np.poly1d(coeffs)
+        pol = [p(n) for n in claves]
+        
+       
+        if claves[len(claves)-1]- claves[0] > 30:
+          print(f"Salto de ciclo entre {claves[0]} y {claves[len(claves)-1]} por brecha de datos")
+          
+        else:
+            valor_real = np.array(valores)
+            valor_pol = np.array(pol)
+            error = np.abs(valor_real - valor_pol)
+            e.append(list(error))
+            errores_totales = np.concatenate((errores_totales,error))
+            
+
+    media = np.mean(errores_totales)
+    std = np.std(errores_totales)
+    
+    return media,std
 #Funciones auxiliares
 
 """Introduces datos, numero de muestras por paso y el umbral"""
