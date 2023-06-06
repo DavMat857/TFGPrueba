@@ -4,19 +4,25 @@ from sklearn.cluster import DBSCAN
 from sklearn import metrics
 from funcionesdef import*
 
-#Datos seleccionados
-filename = "MAD1060R001s.23O"
+#Datos a utilizar
+filename = "datos/MAD1060R001s.23O"
 sat = 'G07'
-frecuen = L1(filename,sat)    
+datos = L1(filename,sat)    
+datos_por_paso = 35
+tiempo = 4
 
-# Con esto graficaremos la frecuencia L1 de todos los satélites 
-def preprocesamiento():
+#Visualización de L1 para cada satéliet
+def visualización():
     graficar_frec(filename, 4)
-        
-def algoritmo(datos,datos_por_paso,tiempo): 
+
+#Algoritmo
+def algoritmo(datos=datos,datos_por_paso=datos_por_paso,tiempo=tiempo): 
     for i in range(0,len(datos),datos_por_paso):
         print("RANGO entre" , i*tiempo , (i+datos_por_paso)*tiempo)
         DBS(datos,i,i+datos_por_paso,tiempo)
+
+
+#Funciones auxiliares
 
 def DBS(frec ,rango_min,rango_max,tiempo):
     valores = select_eps(frec,rango_min,rango_max,tiempo) #valores[0] me da el eps y valores[1] me da std
@@ -36,7 +42,6 @@ def select_eps(frec,rango_min,rango_max,tiempo,n=3):
         std = np.std(phase_diff)
         
         phase_diff_abs = [abs(i) for i in phase_diff]
-        mean = np.mean(phase_diff_abs)
         
         eps1 = seleccion_eps_EUCLIDEAN(infor,n,min(phase_diff_abs), max(phase_diff_abs))
         
