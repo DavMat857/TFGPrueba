@@ -1,26 +1,17 @@
 import numpy as np
-import sys
 from funcionesdef import*
-filename = "MAD1047A00.23O"
+
+#Datos a utilizar
+filename = "datos/MAD1047A00.23O"
 sat = 'G10'
-
-
-#Datos utilizar
-def datos_usar(filename,sat):
-  datos = all_information2(filename)
-  l1 = L1(filename, sat)
-  l2 = L2(filename, sat)
-  io = combinacion_libre_io(l1,l2)
-  return datos,l1,l2,io
-
-#Ejemplo a utilizar
 datos = all_information2(filename)
 l1 = L1(filename, sat)
 l2 = L2(filename, sat)
 io = combinacion_libre_io(l1,l2)
+
   
 #Vamos a graficar L1 y L2, las combinaciones libre de geometría e ionosfera
-def intro():
+def visualizacion():
   
     l1menosl2 = f1menosf2(l1 , l2)
     plt.plot([i for i in l1.keys()],[j for j in l1.values()],'.',label = "L1")
@@ -41,7 +32,7 @@ def intro():
     alg_graf(io,10,color = 'red')
     plt.show()    
 
-#Proceso que realiza el algoritmo
+#Algoritmo
 def algoritmo() :
   #Creación de listas donde almacenar resultados
     saltos_comunes = []
@@ -68,7 +59,7 @@ def algoritmo() :
     print(f"Hay dudas de que haya salto de ciclo en geo para los instantes {duda_geo} y en ion para {duda_ion}")            
     return duda_geo,duda_ion
  
-
+#Funciones auxiliares
 def combinacion_libre_io(l1, l2):
     
     D = {}
@@ -80,7 +71,6 @@ def combinacion_libre_io(l1, l2):
     F2 = 1227.60e6
     
     datos = (l1_data* (F1**2) - l2_data * (F2**2 )) / (F1**2 - F2**2)
-    
     datos= list(datos)
     
     D = dict(zip(list(l1.keys()),datos))
