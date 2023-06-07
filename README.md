@@ -17,7 +17,8 @@ __Observación__: los algoritmos siguen la misma estructura
 3. Algoritmo.
 4. Función auxiliar.
 
-* `combinacion_libre_geo.py`: es un algoritmo que utiliza la combinación libre de geometría
+* `combinacion_libre_geo.py`: es un algoritmo que utiliza la combinación libre de geometría, tomando un polinomio distinto cada 10 muestras.
+* `combinacion_libre_geo.py`: es un algoritmo que utiliza la combinación libre de geometría, tomando un polinomio distinto cada vez que ocurre un salto de ciclo.
 * `combinacion_libre_io.py`: es un algoritmo que utiliza la combinación libre de ionosfera para la detección de saltos de ciclo
 * `combinacion_geo_iono.py`: es un algoritmo que utiliza la combinación libre de geometría e ionosfera, realizando comparaciones entre ellas.
 	
