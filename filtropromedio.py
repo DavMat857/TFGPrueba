@@ -4,11 +4,11 @@ import matplotlib.pyplot as plt
 from funcionesdef import*
 
 #Datos a seleccionar
-filename = "TERU042A00.23O"
+filename = "datos/TERU042A00.23O"
 sat = 'G04'
-l1 = L1(filename, sat,30)
-claves = list(p2.keys())
-valores = list(p2.values())
+l1 = L1(filename, sat)
+claves = list(l1.keys())
+valores = list(l1.values())
 
 
 def algoritmo_MAD(data= valores, window_size= 10,tiempo= 30):
@@ -21,15 +21,13 @@ def algoritmo_MAD(data= valores, window_size= 10,tiempo= 30):
             print(f"Salto de ciclo detectado en el instante de tiempo igual a {(i)*tiempo}.")
             slip_flags[i] = i*tiempo
             
-    
     return slip_flags
   
   
 def algoritmo_DT(valores = valores,claves = claves,tiempo = 30):
-    window_size = 10  # number of measurements in the sliding window
-    threshold = 3  # threshold for cycle slip detection (standard deviations)
-    plt.plot([i*tiempo for i in claves],valores,'.')
-    #plt.plot(claves,valores,'.')
+    window_size = 10  
+    threshold = 3  
+    
     times = []
     
     moving_average = np.convolve(valores, np.ones(window_size)/window_size, mode='valid')
@@ -39,26 +37,9 @@ def algoritmo_DT(valores = valores,claves = claves,tiempo = 30):
         
     for i in range(len(std)):
         if abs(valores[i+window_size-1] - moving_average[i]) > 2 * std[i]:
-            times.append(claves[i+window_size-1])
-            print(f"Salto de ciclo detectado en el instante de tiempo igual a {(claves[i+window_size-1])*30}.")
-    plt.xlabel("Tiempo en segundos")
-    plt.ylabel("P2 en metros")
-    plt.title("Detector de ciclo usando sliding window")
-    
-    #Brechas de datos
-    ti = []
-    aux = np.diff(claves)
-    for i in range(len(aux)):
-        if aux[i]>30:  
-            ti.append(i-1)
-            ti.append(i) 
-    for i in ti:
-        plt.axvline(x  = claves[i+1]*30, color = 'g')
-        
-    for i in times:
-
-        plt.plot(i*30,valores[i],'ro')# Para i-5 queda bonito
-    plt.show()
+            times.append(claves[i+window_size-1]*tiempo)
+            
+    return times
 
 def median_absolute_deviation(data, window_size):
     mad = []

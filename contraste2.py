@@ -1,4 +1,4 @@
-from regresion import*
+from regresion2 import*
 from scipy.stats import t
 import scipy.stats as stats
 
@@ -16,8 +16,8 @@ def comprobacion( datos=datos, paso=paso):
     for i in lista_saltos:
         try:
             
-            data_before = residuos([datos[i] for i in range(i[0]-paso,i[0],1)])
-            data_after = residuos([datos[i] for i in range(i[0],i[1],1)])
+            data_before = residuos([datos[i] for i in range(i-paso,i,1)])
+            data_after = residuos([datos[i] for i in range(i,i+paso,1)])
             saltos_comprobacion.append(t_student(data_before,data_after))
             
         except:

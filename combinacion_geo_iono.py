@@ -13,7 +13,7 @@ io = combinacion_libre_io(l1,l2)
 numero_muestras = 10
    
 #Algoritmo
-def algoritmo() :# umbral y nº de observaciones
+def algoritmo(io=io,geo=geo,numero_muestras=numero_muestras) :# umbral y nº de observaciones
   #Creación de listas donde almacenar resultados
     saltos_comunes = []
     duda_geo = []

@@ -7,7 +7,7 @@ sat = 'G10'
 datos = all_information2(filename)
 l1 = L1(filename, sat)
 l2 = L2(filename, sat)
-
+geo = f1menosf2(l1,l2)#L1-L2
 
 #Visualización de L1 para cada satélite para L2, poner 4 en vez de 3
 def visualizacion():
@@ -18,13 +18,12 @@ def visualizacion():
 numero_muestras = 10
 
 
-def algoritmo():
-    
-    geo = f1menosf2(l1,l2) #L1-L2
-    graf_datos(geo, "combinación L1-L2")
-    media,std = selector_umbral(geo,numero_muestras)
+def algoritmo(datos = geo,numero_muestras=numero_muestras):
+     
+    graf_datos(datos, "combinación L1-L2")
+    media,std = selector_umbral(datos,numero_muestras)
     umbral = media + std
-    resultados = alg_sacar_saltos(geo,numero_muestras,umbral)
+    resultados = alg_sacar_saltos(datos,numero_muestras,umbral)
     return resultados
 
 #Obtención del umbral

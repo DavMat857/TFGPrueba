@@ -74,6 +74,8 @@ def dosaux(data,claves): # graficar los residuos sin tener en cuenta el nº de o
         b = True
         #print(f"Salto de ciclo entre {claves[0]} y {claves[len(claves)-1]}")
 
-        saltos = [claves[0],claves[len(claves)-1]]
+        for i in range(len(condicion)):
+            if condicion[i]==True:
+                saltos = claves[i]
     return b, saltos
 
