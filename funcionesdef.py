@@ -2,7 +2,7 @@
 # con el menor número de comentarios
 
 import matplotlib.pyplot as plt
-
+import numpy as np
 ######################################Funciones auxiliares
 def words(s: str) -> list:  
     lista = []
@@ -140,6 +140,22 @@ def f1menosf2(f1 : dict ,f2: dict) -> dict:
         if i in f1.keys() and i in f2.keys():
             F[i] = f1[i] - f2[i]
     return F
+
+def combinacion_libre_ios(l1, l2):
+    
+    D = {}
+    
+    l1_data = np.array(list(l1.values()))
+    l2_data = np.array(list(l2.values()))
+    
+    F1 = 1575.42e6
+    F2 = 1227.60e6
+    
+    datos = (l1_data* (F1**2) - l2_data * (F2**2 )) / (F1**2 - F2**2)
+    datos= list(datos)
+    
+    D = dict(zip(list(l1.keys()),datos))
+    return D
 
 #Detecta una brecha de datos
 def brecha(tiempos : list) -> list:

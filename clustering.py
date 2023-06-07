@@ -106,6 +106,8 @@ def grafica_DBSCAN(frec ,n ,eps,rango_min,rango_max,tiempo):
         xy = infor[class_member_mask & ~core_samples_mask]
         plt.plot(xy[:, 0], xy[:, 1], 'o', markerfacecolor=tuple(col),
                  markeredgecolor='k', markersize=3)
-    
-    plt.title('Estimated number of DBSCAN clusters: %d' % (len(unique_labels - {-1})))
-    plt.show()
+    if len(unique_labels - {-1})>1:
+        plt.title('Estimated number of DBSCAN clusters: %d' % (len(unique_labels - {-1})))
+        plt.show()
+    else:
+        pass
