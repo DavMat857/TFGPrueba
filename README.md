@@ -1,6 +1,7 @@
 # TFG: MÉTODOS HEURÍSTICOS PARA DETECCIÓN DE DISCONTINUIDADES EN LA RECEPCIÓN DE SATÉLITES DE POSICIONAMIENTO
 #### Autor: David Labrador Merino
-Observación: la creación de este repositorio no está basado en otros y la autoría me pertenece al 100% 
+Observación: la creación de este repositorio no está basado en otros y la autoría me pertenece al 100%
+Observación2: los números que aparecen antes del script hacen referencia al orden en que aparecen en el TFG, aunque las segundas versiones de los algoritmos como regresion2 no aparecen de forma explícita, sino como una observación.
 
 Vamos a presentar distintos scripts para la detección de saltos de ciclo:
 
@@ -27,5 +28,6 @@ __Observación__: los algoritmos siguen la misma estructura
 * `regresion.py`: algoritmo basado en la regresión lineal para la detección de saltos de ciclo.
 	* Implementar los nuevos r^2, s, r para la creación de mejores modelos.
 * `contraste.py`: es un contraste de hipótesis usando t-Student para `regresion.py`. 
+* `regresion2.py`y `contraste2.py` son análogos a los anteriores a diferencia que en estos se toma el instante donde ocurre el salto de ciclo y en los otros aparece el intervalo un intervalo de paso, es mejor este caso.
 	* Eliminar bibliotecas innecearias
 
