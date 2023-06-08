@@ -186,8 +186,8 @@ def satelites(filename : str ) -> list:
             lista.append(j)
     return lista
 
-
-def graficar_frec(filename : str, frec : int) -> None:#Se puede optimizar bastante aunque no es determinante en este caso
+#tiempo marca la diferencia entre cada observación por defecto será 1
+def graficar_frec(filename : str, frec : int,tiempo = 1) -> None:#Se puede optimizar bastante aunque no es determinante en este caso
     sats = satelites(filename)
     
     for i in sats:
@@ -196,11 +196,11 @@ def graficar_frec(filename : str, frec : int) -> None:#Se puede optimizar bastan
         plt.title(i)
         plt.ylabel(f"{frecue[frec]} en metros")
         plt.xlabel("Tiempo en segundos")
-        plt.plot([i for i in datos.keys()] , [j for j in datos.values()], '.b')
+        plt.plot([i*tiempo for i in datos.keys()] , [j for j in datos.values()], '.b')
         
         plt.show()
 
-def graficar_sat(filename : str , frec : int , sat : str) -> None:
+def graficar_sat(filename : str , frec : int , sat : str,tiempo=1) -> None:
     if frec == 0 :
         datos = C1(filename, sat)
 

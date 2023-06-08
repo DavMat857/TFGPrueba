@@ -18,11 +18,12 @@ def visualizacion():
 numero_muestras = 10
 
 
-def algoritmo(datos = geo,numero_muestras=numero_muestras):
+def algoritmo(datos = geo,numero_muestras=numero_muestras,multiplo=3):
      
     graf_datos(datos, "combinación L1-L2")
     media,std = selector_umbral(datos,numero_muestras)
-    umbral = media + std
+    #umbral = media + std
+    umbral = std * multiplo
     resultados = alg_sacar_saltos(datos,numero_muestras,umbral)
     return resultados
 

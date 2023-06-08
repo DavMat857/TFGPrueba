@@ -27,7 +27,7 @@ def algoritmo(datos=datos,datos_por_paso=datos_por_paso,tiempo=tiempo):
 def DBS(frec ,rango_min,rango_max,tiempo):
     valores = select_eps(frec,rango_min,rango_max,tiempo) #valores[0] me da el eps y valores[1] me da std
     if valores:
-        grafica_DBSCAN(frec ,2 ,valores[0]+2*valores[1],rango_min,rango_max,tiempo) #Sumarle dos veces la desviación típica
+        grafica_DBSCAN(frec ,2 ,valores[0]+valores[1],rango_min,rango_max,tiempo) #Sumarle dos veces la desviación típica
 
 def select_eps(frec,rango_min,rango_max,tiempo,n=3):
     
@@ -88,26 +88,28 @@ def grafica_DBSCAN(frec ,n ,eps,rango_min,rango_max,tiempo):
     #SOLO GRAFICAR
     unique_labels = set(labels)
     print(unique_labels)
-    colors = [plt.cm.Spectral(each)
-              for each in np.linspace(0, 1, len(unique_labels))]
-    
-    plt.figure(figsize=(8,4))
-    for k, col in zip(unique_labels, colors):
-        if k == -1:
-            # Black used for noise.
-            col = [0, 0, 0, 1]
-    
-        class_member_mask = (labels == k)
-    
-        xy = infor[class_member_mask & core_samples_mask]
-        plt.plot(xy[:, 0], xy[:, 1], 'o', markerfacecolor=tuple(col),
-                 markeredgecolor='k', markersize=5)
-    
-        xy = infor[class_member_mask & ~core_samples_mask]
-        plt.plot(xy[:, 0], xy[:, 1], 'o', markerfacecolor=tuple(col),
-                 markeredgecolor='k', markersize=3)
     if len(unique_labels - {-1})>1:
+        
+        colors = [plt.cm.Spectral(each)
+                for each in np.linspace(0, 1, len(unique_labels))]
+        
+        plt.figure(figsize=(8,4))
+        for k, col in zip(unique_labels, colors):
+            if k == -1:
+                # Black used for noise.
+                col = [0, 0, 0, 1]
+        
+            class_member_mask = (labels == k)
+        
+            xy = infor[class_member_mask & core_samples_mask]
+            plt.plot(xy[:, 0], xy[:, 1], 'o', markerfacecolor=tuple(col),
+                    markeredgecolor='k', markersize=5)
+        
+            xy = infor[class_member_mask & ~core_samples_mask]
+            plt.plot(xy[:, 0], xy[:, 1], 'o', markerfacecolor=tuple(col),
+                    markeredgecolor='k', markersize=3)
         plt.title('Estimated number of DBSCAN clusters: %d' % (len(unique_labels - {-1})))
         plt.show()
+    
     else:
         pass

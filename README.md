@@ -1,7 +1,7 @@
 # TFG: MÉTODOS HEURÍSTICOS PARA DETECCIÓN DE DISCONTINUIDADES EN LA RECEPCIÓN DE SATÉLITES DE POSICIONAMIENTO
 #### Autor: David Labrador Merino
 Observación: la creación de este repositorio no está basado en otros y la autoría me pertenece al 100%
-Observación2: los números que aparecen antes del script hacen referencia al orden en que aparecen en el TFG, aunque las segundas versiones de los algoritmos como regresion2 no aparecen de forma explícita, sino como una observación.
+Observación2: Las segundas versiones de los algoritmos como regresion2 no aparecen de forma explícita, sino como una observación.
 
 Vamos a presentar distintos scripts para la detección de saltos de ciclo:
 
@@ -18,7 +18,7 @@ __Observación__: los algoritmos siguen la misma estructura
 4. Función auxiliar.
 
 * `combinacion_libre_geo.py`: es un algoritmo que utiliza la combinación libre de geometría, tomando un polinomio distinto cada 10 muestras.
-* `combinacion_libre_geo.py`: es un algoritmo que utiliza la combinación libre de geometría, tomando un polinomio distinto cada vez que ocurre un salto de ciclo.
+* `combinacion_libre_geo2.py`: es un algoritmo que utiliza la combinación libre de geometría, tomando un polinomio distinto cada vez que ocurre un salto de ciclo.
 * `combinacion_libre_io.py`: es un algoritmo que utiliza la combinación libre de ionosfera para la detección de saltos de ciclo
 * `combinacion_geo_iono.py`: es un algoritmo que utiliza la combinación libre de geometría e ionosfera, realizando comparaciones entre ellas.
 	
