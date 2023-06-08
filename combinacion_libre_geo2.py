@@ -1,4 +1,4 @@
-sys.path.append('G:/Mi unidad/4 curso/Universidad/TFG/observaciones/')
+
 from funcionesdef import*
 import numpy as np
 
