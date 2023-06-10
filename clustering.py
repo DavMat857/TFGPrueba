@@ -15,8 +15,9 @@ tiempo = 4
 def visualización():
     graficar_frec(filename, 4)
 
-#Algoritmo
-def algoritmo(datos=datos,datos_por_paso=datos_por_paso,tiempo=tiempo): 
+#Algoritmo CREO QUE SE PUEDE ELIMINAR EL TIEMPO AL SER PROPORCIONAL
+def algoritmo(datos=datos,datos_por_paso=datos_por_paso,tiempo=1): 
+    graf_datos(datos,"Datos")
     for i in range(0,len(datos),datos_por_paso):
         print("RANGO entre" , i*tiempo , (i+datos_por_paso)*tiempo)
         DBS(datos,i,i+datos_por_paso,tiempo)
@@ -27,7 +28,7 @@ def algoritmo(datos=datos,datos_por_paso=datos_por_paso,tiempo=tiempo):
 def DBS(frec ,rango_min,rango_max,tiempo):
     valores = select_eps(frec,rango_min,rango_max,tiempo) #valores[0] me da el eps y valores[1] me da std
     if valores:
-        grafica_DBSCAN(frec ,2 ,valores[0]+valores[1],rango_min,rango_max,tiempo) #Sumarle dos veces la desviación típica
+        grafica_DBSCAN(frec ,2 ,valores[0]+2*valores[1],rango_min,rango_max,tiempo) #Sumarle dos veces la desviación típica
 
 def select_eps(frec,rango_min,rango_max,tiempo,n=3):
     

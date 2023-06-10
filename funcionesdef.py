@@ -225,4 +225,4 @@ def graficar_sat(filename : str , frec : int , sat : str,tiempo=1) -> None:
 def graf_datos(datos: dict, titulo: str) -> None:
     plt.title(titulo)
     plt.plot([i for i in datos.keys()] , [j for j in datos.values()], '.b')
-    plt.show()
+    plt.show(block=False)

@@ -11,6 +11,8 @@ Vamos a presentar distintos scripts para la detección de saltos de ciclo:
 *  `preprocesado.ipynb`: muestra ejemplos de utilización del anterior script.
 
 ## Algoritmos para la detección del ciclos[Todos están explicados en el TFG]:
+
+Para ejecutarlos una de las opciones es: python -i script.py y luego poner algoritmo() o comprobación() para el caso de `contraste.py`. De esta manera se ejecutan unos valores predeterminados, que se podrían cambiar leyendo las indicaciones de cada algoritmo en `resumen.ipynb`.
 __Observación__: los algoritmos siguen la misma estructura
 1. Datos a seleccionar.
 2. Visualización de los datos.
