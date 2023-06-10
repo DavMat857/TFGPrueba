@@ -40,12 +40,12 @@ def obtener_elemento_seleccionado():
         l1 = L1(datos,'G10')
         #mostrar_informacion(l1.keys())
         ##############Hay que cambiar algo para que me deje 
-        sats = desplegable(ventana,satelites(datos))
+        """sats = desplegable(ventana,satelites(datos))
         seleccion_sat = sats.curselection()
         seleccion = seleccion_sat
         if seleccion_sat:
             satelites_seleccionados = [sats.get(index) for index in seleccion_sat]
-            print(satelites_seleccionados[0])
+            print(satelites_seleccionados[0])"""
         ##############3333
         print(algoritmo)
         resultado = eval(algoritmo)(l1,10,3)
