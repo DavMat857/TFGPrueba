@@ -15,3 +15,9 @@
 
 ####VIGO359A00.22O
 25/12/2022 | VIGO | Intervalo 30s
+
+####BADJ122A00.22O
+02/05/2022 | BADJ | Intervalo 30s
+
+####PENI168A00.22O
+17/06/2022 | PENI | Intervalo 30s
