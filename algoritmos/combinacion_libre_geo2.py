@@ -19,10 +19,10 @@ def visualizacion():
 
 #Algoritmo
 
-def algoritmo(datos = geo,numero_muestras=numero_muestras, tiempo = 1):
+def algoritmo(datos = geo,numero_muestras=numero_muestras,multiplo=3, tiempo = 1):
      
-    graf_datos(datos, "combinación libre geometría", tiempo)
-    resultados = alg_sacar_saltos(datos,numero_muestras)
+    graf_datos(datos, "Algoritmo_geometria", tiempo)
+    resultados = alg_sacar_saltos(datos,numero_muestras,multiplo)
     resultados = list(map(lambda x: x*tiempo, resultados))
     return resultados
 
@@ -30,7 +30,7 @@ def algoritmo(datos = geo,numero_muestras=numero_muestras, tiempo = 1):
 #Funciones auxiliares
 
 """Introduces datos, numero de muestras por paso y el umbral"""
-def alg_sacar_saltos(datos,numero_muestras): 
+def alg_sacar_saltos(datos,numero_muestras,multiplo): 
     saltos = []
     i = 1
     
@@ -52,7 +52,7 @@ def alg_sacar_saltos(datos,numero_muestras):
             error = np.abs(valor_real - valor_pol)
 
             
-            if error  > umbral:
+            if error  > multiplo*umbral:
                 saltos.append(claves[i])
                 i=i+1
                 pol, umbral= crear_pol(claves[i:i+numero_muestras],valores[i:i+numero_muestras])

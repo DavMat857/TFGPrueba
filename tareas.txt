@@ -6,3 +6,14 @@
 	1.- Combinaciones
 	2.- Clustering(queda mejorar umbral)
 	3.- Regresión
+
+
+1.- Libre geo 1 y 2 ver como hacerlos en la teoría y pasarlos a la práctica
+
+2.- Clustering hallar mejor umbrales o combinanrlo OPTICS
+
+3.- Regresión(teoría) pero de momento bien al igual que con contraste
+
+4.- filtropromedio revisar teoría
+
+5.- Mejorar aplicacion

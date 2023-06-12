@@ -23,7 +23,7 @@ numero_muestras = 10
 def algoritmo(datos = io, numero_muestras = numero_muestras,multiplo = 3, tiempo=1):
 
     
-    graf_datos(datos, "Combinación libre io")
+    graf_datos(datos, "Algoritmo_ionosfera")
     media,std = selector_umbral(datos,numero_muestras)
     #umbral = media + std
     umbral = std

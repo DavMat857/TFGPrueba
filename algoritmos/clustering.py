@@ -17,7 +17,7 @@ def visualización():
 
 #Algoritmo CREO QUE SE PUEDE ELIMINAR EL TIEMPO AL SER PROPORCIONAL
 def algoritmo(datos=datos,datos_por_paso=datos_por_paso,tiempo=1): 
-    graf_datos(datos,"Datos")
+    graf_datos(datos,"Algoritmo_clustering")
     for i in range(0,len(datos),datos_por_paso):
         print("RANGO entre" , i*tiempo , (i+datos_por_paso)*tiempo)
         DBS(datos,i,i+datos_por_paso,tiempo)

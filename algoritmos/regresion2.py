@@ -10,7 +10,7 @@ import time
 filename = "datos/GRA1065Q00.23O"
 sat = 'G02'
 datos = L1(filename , sat)
-paso = 9
+paso = 10
 
 #Visualización
 def visualizacion() :
@@ -30,7 +30,7 @@ def visualizacion() :
     
 #Umbral 2*std + media
 def algoritmo(datos = datos , paso = paso,tiempo =1):
-    graf_datos(datos,"",tiempo)
+    graf_datos(datos,"Algoritmo_regresion",tiempo)
     claves = np.array(list(datos.keys()))
     valores = np.array(list(datos.values()))
     resultados = []
@@ -40,8 +40,10 @@ def algoritmo(datos = datos , paso = paso,tiempo =1):
         if i + paso < len(claves):
             brecha = max(np.diff(claves[i:i + paso]))
            
-            if brecha > 5:
+            if brecha > 30:
                 #print(f"Hay una brecha de datos entre {claves[i]} y {claves[i+paso]}")
+                #resultados.append(i)
+                #i = i + paso
                 pass
             else:
                 b,salt = dosaux(valores[i:i + paso],claves[i: i +paso])
