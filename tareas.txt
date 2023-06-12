@@ -1,8 +1,8 @@
 * Respecto a combinaciones:
 	1.- Como sacar umbral lo de la media + desviación típica de los residuos
 	2.- Modificar mezcla combinaciones
-
+	
 * Completados
 	1.- Combinaciones
-	2.- Clustering
+	2.- Clustering(queda mejorar umbral)
 	3.- Regresión
