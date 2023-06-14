@@ -5,46 +5,60 @@ from funcionesdef import*
 
 #Datos a seleccionar
 filename = "datos/TERU042A00.23O"
-sat = 'G04'
+sat = 'G08'
 l1 = L1(filename, sat)
-claves = list(l1.keys())
-valores = list(l1.values())
+datos = l1
 
-
-def algoritmo_MAD(data= valores, window_size= 10,tiempo= 1):
-    n = len(data)
-    threshold = 3 * median_absolute_deviation(data, window_size)
-    slip_flags = np.zeros(n, dtype=int)
-    for i in range(window_size, n):
-        window = data[i-window_size:i]
-        if np.any(np.abs(window - np.median(window)) > threshold):
-            print(f"Salto de ciclo detectado en el instante de tiempo igual a {(i)*tiempo}.")
-            slip_flags[i] = i*tiempo
-            
-    return slip_flags
-  
-  
-def algoritmo_DT(valores = valores,claves = claves,tiempo = 30):
-    window_size = 10  
-    threshold = 3  
+def resultados():
+    D= {}
+    sats = satelites(filename)
+    for sat in sats:
+        l1 = L1(filename, sat)
+        D[sat] = algoritmo(0,l1)
+    return D
+# 0 para MAD ; 1 para STD
+def algoritmo(algoritmo = 0, datos= datos, window_size = 10, multiplo = 2 , tiempo = 1 ):
+    graf_datos(datos,"Algoritmo_filtroPromedio",tiempo)
+    saltos = []
+    i = 0
     
-    times = []
+    claves = list(datos.keys())
+    valores = list(datos.values())
     
     moving_average = np.convolve(valores, np.ones(window_size)/window_size, mode='valid')
-    std = np.zeros(len(valores) - window_size + 1)
-    for i in range(len(std)):
-        std[i] = np.std(valores[i:i+window_size])
+    
+    #for i in range(0,len(claves)-window_size,1):
+    while i + window_size< len(moving_average):
         
-    for i in range(len(std)):
-        if abs(valores[i+window_size-1] - moving_average[i]) > 2 * std[i]:
-            times.append(claves[i+window_size-1]*tiempo)
+        if i + window_size < len(moving_average):
+            brecha = max(np.diff(claves[i:i+window_size]))
             
-    return times
-
-def median_absolute_deviation(data, window_size):
-    mad = []
-    for i in range(window_size, len(data)):
-        window = data[i-window_size:i]
-        mad.append(np.median(np.abs(window - np.median(window))))
-    return np.median(mad)
-
+            if brecha >30:
+               saltos.append(claves[i])
+               i = i + window_size
+            else:
+               b = True
+               j = i
+               if algoritmo ==0 : umbral  =multiplo*median_absolute_desviation(valores[i:i+window_size])
+               else: umbral  =multiplo*np.std(valores[i:i+window_size])
+               
+               while b== True and j < i + window_size:     
+                
+                if np.abs(valores[j]-moving_average[j])> umbral:
+                    saltos.append(claves[i])
+                    i = i + window_size
+                    b = False
+            
+                else: 
+                    j = j + 1
+                    
+               i = i+1
+    saltos = list(map(lambda x: x*tiempo,saltos))
+    return saltos
+      
+def median_absolute_desviation(datos):
+    mediana_datos = np.median(datos)
+    restas = []
+    for i in datos:
+        restas.append(np.abs(i-mediana_datos))
+    return np.median(restas)
