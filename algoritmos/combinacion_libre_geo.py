@@ -1,8 +1,11 @@
 import numpy as np
 from funcionesdef import*
 
+#Primero umbral y después pol metodo2
+
 #Datos a utilizar
 filename = "datos/MAD1047A00.23O"
+filename1 = "datos/GRA1065Q00.23O"
 sat = 'G10'
 datos = all_information2(filename)
 l1 = L1(filename, sat)
@@ -25,6 +28,7 @@ def algoritmo(datos = geo,numero_muestras=numero_muestras,multiplo=3, tiempo=1):
     #umbral = media + std
     umbral = std * multiplo
     resultados = alg_sacar_saltos(datos,numero_muestras,umbral)
+    resultados = [i for i in resultados if i!=0]
     resultados = list(map(lambda x: x*tiempo,resultados))
     return resultados
 
@@ -81,7 +85,7 @@ def alg_sacar_saltos(datos,numero_muestras,umbral):
         pol = [p(n) for n in claves]
         
         if claves[len(claves)-1]- claves[0] > 30:
-          saltos.append(claves[j])
+          saltos.append(claves[0])
         else:
             valor_real = np.array(valores)
             valor_pol = np.array(pol)
