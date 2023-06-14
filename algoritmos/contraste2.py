@@ -4,12 +4,15 @@ import scipy.stats as stats
 
 #Seleccionamos datos a utilizar
 filename = "datos/GRA1065Q00.23O"
-sat ='G02'
-l1 = L1(filename,sat)
-datos = l1
+sat ='G27'
+l1 = L1(filename , sat)
+l2 = L2(filename, sat)
+datos = f1menosf2(l1,l2)
 paso = 10
+tiempo = 1
 
-lista_saltos = algoritmo(datos,paso)
+#Paso más pequeño implica mayor True
+lista_saltos = algoritmo(datos,paso,tiempo)
 #Algoritmo de comprobación
 def comprobacion( datos=datos, paso=paso, lista_saltos = lista_saltos):
     
