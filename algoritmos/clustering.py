@@ -11,6 +11,8 @@ datos = L1(filename,sat)
 datos_por_paso = 35
 tiempo = 4
 
+filename30 = "datos/TERU042A00.23O"
+
 #Visualización de L1 para cada satéliet
 def visualización():
     graficar_frec(filename, 4)
@@ -21,7 +23,7 @@ def algoritmo(datos=datos,datos_por_paso=datos_por_paso,tiempo=1):
     for i in range(0,len(datos),datos_por_paso):
         print("RANGO entre" , i*tiempo , (i+datos_por_paso)*tiempo)
         DBS(datos,i,i+datos_por_paso,tiempo)
-
+    
 
 #Funciones auxiliares
 
@@ -30,6 +32,8 @@ def DBS(frec ,rango_min,rango_max,tiempo):
     if valores:
         grafica_DBSCAN(frec ,2 ,valores[0]+2*valores[1],rango_min,rango_max,tiempo) #Sumarle dos veces la desviación típica
 
+
+        
 def select_eps(frec,rango_min,rango_max,tiempo,n=3):
     
     infor = list(frec.items())[rango_min:rango_max]
@@ -50,8 +54,7 @@ def select_eps(frec,rango_min,rango_max,tiempo,n=3):
     else:
         print("SALTO DE CICLO")
         
-    
-    
+
 def seleccion_eps_EUCLIDEAN(datos ,n, minimo,maximo): # Voy a comentar las gráficas del silhouette
     
 
@@ -114,3 +117,41 @@ def grafica_DBSCAN(frec ,n ,eps,rango_min,rango_max,tiempo):
     
     else:
         pass
+
+ #3#SI DESARROLLO OPTICS   
+from sklearn.cluster import OPTICS
+def algpri(datos,paso):
+    v = list(datos.values())
+    k = list(datos.keys())
+    for i in range(k[0],k[len(k)-1],paso):
+        
+        primero(v[i:i+paso],k[i:i+paso])
+        
+def primero(v,d):
+
+    tiempos = np.array(d)
+    valores = np.array(v)
+    
+    # Preparar los datos para OPTICS
+    X = np.column_stack((tiempos, valores))
+    
+    # Crear y ajustar el modelo OPTICS
+    optics = OPTICS(max_eps=valores.mean(), min_samples=3, metric='euclidean')
+    optics.fit(X)
+    
+    # Obtener las etiquetas de los clusters
+    labels = optics.labels_
+    
+    # Imprimir los resultados
+    print("Etiquetas de los clusters:")
+    print(labels)
+    
+    
+    # Graficar los datos y los clusters
+    plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='viridis')
+    plt.xlabel('Tiempo')
+    plt.ylabel('Valor')
+    plt.title('Clustering con OPTICS')
+    plt.colorbar()
+    plt.show()
+    
