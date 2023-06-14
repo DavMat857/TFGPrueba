@@ -87,7 +87,7 @@ def alg_sacar_saltos(datos,numero_muestras,umbral):
         
        
         if claves[len(claves)-1]- claves[0] > 30:
-          saltos.append(claves[j])
+          saltos.append(claves[0])
         else:
             valor_real = np.array(valores)
             valor_pol = np.array(pol)
