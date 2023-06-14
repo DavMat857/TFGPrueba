@@ -1,7 +1,7 @@
 import numpy as np
 from funcionesdef import*
 
-
+#Análogo geo
 
 #Datos a utilizar
 filename = "datos/MAD1047A00.23O"
@@ -23,12 +23,13 @@ numero_muestras = 10
 def algoritmo(datos = io, numero_muestras = numero_muestras,multiplo = 3, tiempo=1):
 
     
-    graf_datos(datos, "Algoritmo_ionosfera")
+    graf_datos(datos, "Algoritmo_ionosfera",tiempo)
     media,std = selector_umbral(datos,numero_muestras)
     #umbral = media + std
-    umbral = std
+    umbral =multiplo*std
     resultados = alg_sacar_saltos(datos,numero_muestras,umbral*multiplo)
     resultados = list(map(lambda x: x*tiempo, resultados))
+    resultados = [i for i in resultados if i!=0]
     return resultados
 
 #Obtención de umbral
